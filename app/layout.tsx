@@ -1,5 +1,6 @@
 import './globals.css'
 
+import { ClerkProvider } from '@clerk/nextjs'
 import { Merriweather } from 'next/font/google'
 import type { Metadata } from 'next'
 
@@ -19,9 +20,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html className={inter.className} lang="en">
-      <body
-        className="h-full w-full overflow-x-hidden overflow-y-auto bg-stone-800 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:40px_40px]">{children}</body>
-    </html>
+    <ClerkProvider appearance={{
+      layout: {
+        termsPageUrl: 'https://hapzy.co/terms',
+        privacyPageUrl: 'https://hapzy.co/privacy',
+        helpPageUrl: 'https://hapzy.co/help',
+      }
+    }}>
+      <html className={inter.className} lang="en">
+        {/* className="h-full w-full overflow-x-hidden overflow-y-auto bg-stone-800 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:40px_40px]" */}
+        <body
+          className="h-full w-full">{children}</body>
+      </html>
+    </ClerkProvider>
   )
 }
