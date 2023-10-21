@@ -1,37 +1,21 @@
 import {
   Bars3Icon,
   BellIcon,
-  ChartBarIcon,
-  ChartBarSquareIcon,
-  ChartPieIcon,
-  ChatBubbleLeftRightIcon,
   Cog6ToothIcon,
-  HomeIcon,
-  SpeakerWaveIcon,
 } from "@heroicons/react/24/outline";
+import { classNames, navigation } from "@/contants";
 
 import { DashboardNavBar } from "@/components/dashboardNavBar";
 import Link from "next/link";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { UserButton } from "@clerk/nextjs";
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
-const navigation = [
-  { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
-  { name: "Listings", href: "#", icon: ChartBarSquareIcon, current: false },
-  { name: "Chats", href: "#", icon: ChatBubbleLeftRightIcon, current: false },
-  { name: "Stats", href: "#", icon: ChartBarIcon, current: false },
-  { name: "Marketing", href: "#", icon: SpeakerWaveIcon, current: false },
-  { name: "Reports", href: "#", icon: ChartPieIcon, current: false },
-];
+import { checkAuth } from "@/lib/auth";
+import { getOrCreateDBUser } from "@/lib/prisma/users";
 
 export default async function UserDashboard() {
-
-
-
+  const { id, user } = await checkAuth();
+  const dbUser = await getOrCreateDBUser({ id, user });
+  console.log("dbUser: ", dbUser);
 
   return (
     <>
@@ -43,7 +27,7 @@ export default async function UserDashboard() {
           <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-slate-200 bg-white px-6 pb-4">
             <div className="flex h-16 shrink-0 items-center">
               <Link className="h-8 w-auto" href="/">
-                <span className="font-bold text-2xl">HAPZY</span>
+                <span className="text-2xl font-bold">HAPZY</span>
               </Link>
             </div>
             <nav className="flex flex-1 flex-col">
@@ -56,16 +40,16 @@ export default async function UserDashboard() {
                           href={item.href}
                           className={classNames(
                             item.current
-                              ? "bg-slate-50 text-indigo-600"
-                              : "text-slate-700 hover:text-indigo-600 hover:bg-slate-50",
+                              ? "bg-slate-50 text-blue-600"
+                              : "text-slate-700 hover:text-blue-600 hover:bg-slate-50",
                             "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                           )}
                         >
                           <item.icon
                             className={classNames(
                               item.current
-                                ? "text-indigo-600"
-                                : "text-slate-400 group-hover:text-indigo-600",
+                                ? "text-blue-600"
+                                : "text-slate-400 group-hover:text-blue-600",
                               "h-6 w-6 shrink-0"
                             )}
                             aria-hidden="true"
@@ -80,10 +64,10 @@ export default async function UserDashboard() {
                 <li className="mt-auto">
                   <a
                     href="#"
-                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-slate-700 hover:bg-slate-50 hover:text-indigo-600"
+                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-slate-700 hover:bg-slate-50 hover:text-blue-600"
                   >
                     <Cog6ToothIcon
-                      className="h-6 w-6 shrink-0 text-slate-400 group-hover:text-indigo-600"
+                      className="h-6 w-6 shrink-0 text-slate-400 group-hover:text-blue-600"
                       aria-hidden="true"
                     />
                     Settings
@@ -99,7 +83,7 @@ export default async function UserDashboard() {
             <button
               type="button"
               className="-m-2.5 p-2.5 text-slate-700 lg:hidden"
-            // onClick={() => setSidebarOpen(true)}
+              // onClick={() => setSidebarOpen(true)}
             >
               <span className="sr-only">Open sidebar</span>
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />

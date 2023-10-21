@@ -1,12 +1,12 @@
 "use client";
 
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Menu, Popover, Transition } from "@headlessui/react";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
-import { Fragment } from "react";
+import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import Link from "next/link";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { Fragment } from "react";
 
 const user = {
   name: "Chelsea Hagon",
@@ -48,9 +48,9 @@ export default function NavBar() {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="relative flex justify-between lg:gap-8 xl:grid xl:grid-cols-12">
                 <div className="flex md:absolute md:inset-y-0 md:left-0 lg:static xl:col-span-2">
-                  <div className="flex flex-shrink-0 items-center">
+                  <div className="flex shrink-0 items-center">
                     <Link className="h-8 w-auto" href="/">
-                      <span className="font-bold text-3xl">HAPZY</span>
+                      <span className="text-3xl font-bold">HAPZY</span>
                     </Link>
                   </div>
                 </div>
@@ -93,7 +93,7 @@ export default function NavBar() {
                 <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
                   <button
                     type="button"
-                    className="relative ml-5 flex-shrink-0 rounded-full bg-white p-1 text-slate-400 hover:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    className="relative ml-5 shrink-0 rounded-full bg-white p-1 text-slate-400 hover:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                   >
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">View notifications</span>
@@ -101,7 +101,7 @@ export default function NavBar() {
                   </button>
 
                   {/* Profile dropdown */}
-                  <Menu as="div" className="relative ml-5 flex-shrink-0">
+                  <Menu as="div" className="relative ml-5 shrink-0">
                     <div>
                       <Menu.Button className="relative flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                         <span className="absolute -inset-1.5" />
@@ -123,7 +123,7 @@ export default function NavBar() {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none">
                         {userNavigation.map((item) => (
                           <Menu.Item key={item.name}>
                             {({ active }) => (
@@ -173,7 +173,7 @@ export default function NavBar() {
               </div>
               <div className="border-t border-slate-200 pb-3 pt-4">
                 <div className="mx-auto flex max-w-3xl items-center px-4 sm:px-6">
-                  <div className="relative flex-shrink-0 h-10 w-10">
+                  <div className="relative h-10 w-10 shrink-0">
                     <Image
                       fill
                       className="rounded-full"
@@ -191,7 +191,7 @@ export default function NavBar() {
                   </div>
                   <button
                     type="button"
-                    className="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-slate-400 hover:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    className="relative ml-auto shrink-0 rounded-full bg-white p-1 text-slate-400 hover:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                   >
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">View notifications</span>

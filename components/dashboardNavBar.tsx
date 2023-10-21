@@ -1,5 +1,6 @@
 "use client";
 
+import { Dialog, Transition } from "@headlessui/react";
 import {
   ChartBarIcon,
   ChartBarSquareIcon,
@@ -10,16 +11,14 @@ import {
   SpeakerWaveIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
 import Link from "next/link";
 
-// 
+//
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
-
 
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -89,7 +88,7 @@ export const DashboardNavBar = () => {
               <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
                 <div className="flex h-16 shrink-0 items-center">
                   <Link className="h-8 w-auto" href="/">
-                    <span className="font-bold text-2xl">HAPZY</span>
+                    <span className="text-2xl font-bold">HAPZY</span>
                   </Link>
                 </div>
                 <nav className="flex flex-1 flex-col">
