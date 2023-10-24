@@ -1,22 +1,16 @@
+import { classNames, navigation } from "@/constants";
 import {
   Bars3Icon,
   BellIcon,
   Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
-import { classNames, navigation } from "@/contants";
 
 import { DashboardNavBar } from "@/components/dashboardNavBar";
-import Link from "next/link";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { UserButton } from "@clerk/nextjs";
-import { checkAuth } from "@/lib/auth";
-import { getOrCreateDBUser } from "@/lib/prisma/users";
+import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import Link from "next/link";
 
 export default async function UserDashboard() {
-  const { id, user } = await checkAuth();
-  const dbUser = await getOrCreateDBUser({ id, user });
-  console.log("dbUser: ", dbUser);
-
   return (
     <>
       <div>
@@ -26,8 +20,10 @@ export default async function UserDashboard() {
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-slate-200 bg-white px-6 pb-4">
             <div className="flex h-16 shrink-0 items-center">
-              <Link className="h-8 w-auto" href="/">
-                <span className="text-2xl font-bold">HAPZY</span>
+              <Link href="/">
+                <span className="text-base font-bold uppercase leading-tight">
+                  Magic 💍 Moments
+                </span>
               </Link>
             </div>
             <nav className="flex flex-1 flex-col">

@@ -1,23 +1,18 @@
-import { User } from "@clerk/nextjs/server";
 import prismadb from "@/lib/prisma/prisma";
+import { UserAccount } from "@/types/index";
+import { User } from "@clerk/nextjs/server";
 
 const createDBUser = async ({
   firstName,
   lastName,
   middleName,
-  id,
+  userId,
   email,
-}: {
-  firstName: string | null;
-  lastName: string | null;
-  middleName: string | null;
-  id: string;
-  email: string;
-}) => {
+}: UserAccount) => {
   try {
     const user = await prismadb.userAccount.create({
       data: {
-        userId: id,
+        userId,
         firstName: firstName || "",
         lastName: lastName || "",
         middleName: middleName || "",
@@ -38,7 +33,7 @@ export const getOrCreateDBUser = async ({
   user: User | null;
 }) => {
   try {
-    if (!id || !user) return new Error("No user or id");
+    if (!id || !user) return;
     const dbUser = await prismadb.userAccount.findUnique({
       where: {
         userId: id,
@@ -47,18 +42,19 @@ export const getOrCreateDBUser = async ({
 
     if (!dbUser) {
       //  create a new database user
-      const { firstName, lastName, emailAddresses } = user;
+      const { firstName, lastName, emailAddresses, id } = user;
       const newDBUser = await createDBUser({
         firstName,
         lastName,
         middleName: "",
-        id,
+        userId: id,
         email: emailAddresses[0].emailAddress,
       });
       return newDBUser;
     }
     return dbUser;
   } catch (error) {
+    console.log(`PRISMA ERROR FINDING USER ${error}`);
     return error;
   }
 };
